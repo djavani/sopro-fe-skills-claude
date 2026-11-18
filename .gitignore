@@ -1,0 +1,5 @@
+# Pasta gerenciada pelo app, fora do projeto
+synced/
+# Python
+__pycache__/
+*.pyc
