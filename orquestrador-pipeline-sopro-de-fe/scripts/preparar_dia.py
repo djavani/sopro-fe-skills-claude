@@ -16,6 +16,7 @@ import datetime as dt
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 
@@ -23,6 +24,7 @@ HOME = os.path.expanduser("~")
 SK = os.path.join(HOME, ".claude", "skills")
 EXTRATOR = os.path.join(SK, "extrator-mensagem-diaria", "scripts", "extrair.py")
 MUSICA = os.path.join(SK, "gerador-prompts-musicais-sopro-de-fe", "scripts", "gerar_prompts.py")
+WHATSAPP = os.path.join(SK, "orquestrador-pipeline-sopro-de-fe", "scripts", "whatsapp_template.txt")
 
 
 def rodar(cmd):
@@ -80,6 +82,9 @@ def main():
     pasta = os.path.join(a.base, "Textos", f"{rotulo}-{nome_pasta_dia}")
     if os.path.isdir(pasta) and os.listdir(pasta) and not a.forcar:
         print(f"PACOTE_JA_EXISTE: {pasta}\n(use --forcar para refazer; os arquivos atuais foram mantidos)")
+        if not os.path.isfile(os.path.join(pasta, "whatsapp.txt")):
+            shutil.copyfile(WHATSAPP, os.path.join(pasta, "whatsapp.txt"))
+            print("whatsapp.txt ausente no pacote: criado a partir do texto fixo.")
         print(f"DIA_ALVO: {dia_alvo}")
         sys.exit(0)
     os.makedirs(pasta, exist_ok=True)
@@ -101,6 +106,8 @@ def main():
     salvar("style_prompt.txt", style)
     salvar("lyrics_prompt.txt", lyrics)
 
+    shutil.copyfile(WHATSAPP, os.path.join(pasta, "whatsapp.txt"))  # texto fixo, igual todo dia
+
     meta = {"pdf": pdf, "mensagem": num, "dia": dia_alvo, "pasta": pasta,
             "gerado_em": dt.datetime.now().isoformat(timespec="seconds")}
     salvar("meta.json", json.dumps(meta, ensure_ascii=False, indent=2))
@@ -108,7 +115,7 @@ def main():
     print(f"DIA_ALVO: {dia_alvo}")
     print(f"MENSAGEM: {num or 'nao identificada'}")
     print(f"PACOTE: {pasta}")
-    print("ARQUIVOS: saida_a.txt, saida_b.txt, style_prompt.txt, lyrics_prompt.txt, meta.json")
+    print("ARQUIVOS: saida_a.txt, saida_b.txt, style_prompt.txt, lyrics_prompt.txt, whatsapp.txt, meta.json")
     print("CONFERENCIA_LETRA: ok (palavras da letra identicas a Saida B)")
 
 

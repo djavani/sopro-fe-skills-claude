@@ -13,7 +13,7 @@ Você coordena as skills das etapas e **para nos pontos que dependem do usuário
 - PDF semanal: o **PDF mais recente na raiz da base** (o usuário o coloca lá).
 - Imagens do Codex: `<base>\<dia>-feira-capitulos-1-4-vN\` (Etapa 3).
 - Capinhas: `<base>\Thumbs\` (Etapa 4).
-- **Pacote do dia:** `<base>\Textos\Msg<N>-<dia>\` com `saida_a.txt`, `saida_b.txt`, `style_prompt.txt`, `lyrics_prompt.txt`, `meta.json`, `traducoes.txt` (espanhol neutro + inglês internacional, título e texto da Saída B) e, depois, `titulo.txt` e `descricao.txt`.
+- **Pacote do dia:** `<base>\Textos\Msg<N>-<dia>\` com `saida_a.txt`, `saida_b.txt`, `style_prompt.txt`, `lyrics_prompt.txt`, `whatsapp.txt` (texto fixo, idêntico todo dia, vem de `scripts/whatsapp_template.txt` e é criado pelo `preparar_dia.py`; não reescreva nem altere o conteúdo), `meta.json`, `traducoes.txt` (espanhol neutro + inglês internacional, título e texto da Saída B) e, depois, `titulo.txt` e `descricao.txt`.
 
 ## Entrada do usuário
 
@@ -85,7 +85,13 @@ O Canva é **manual**: o usuário sobe música e imagens no projeto `DAHOvg0P-0M
 - Música: baixar da plataforma o áudio final.
 - 16 imagens: caminho da pasta `<dia>-feira-capitulos-1-4-vN`.
 - Capinhas: `Thumbs\<Título>-16x09` e `-1x1`.
-- Textos prontos em: caminho do pacote do dia (inclui `traducoes.txt`, com espanhol e inglês).
+- Textos prontos em: caminho do pacote do dia (inclui `traducoes.txt`, com espanhol e inglês, e `whatsapp.txt`, a mensagem fixa do grupo do WhatsApp).
+
+## Premissas adicionais (definidas pelo usuário em 2026-11-20)
+
+- **Música:** no máximo 4 minutos, se possível; encerramento instrumental/solo de no máximo 20 s (já embutido em `gerador-prompts-musicais-sopro-de-fe`).
+- **Conferência de imagens:** a correção de nomes (proporção + presença de texto) é parte da verificação, mas só com **autorização explícita do usuário a cada geração**: proponha a tabela de renomeação, pergunte e aguarde (ver `gerador-imagens-sopro-de-fe`). Verifique **os 4 capítulos**, mesmo que o script só acuse alguns.
+- **whatsapp.txt:** todo pacote do dia inclui esse texto fixo. Se um pacote antigo não o tiver, o `preparar_dia.py` o cria sem refazer o resto.
 
 ## Regras gerais
 

@@ -30,14 +30,19 @@ Códigos de saída: 0 ok, 2 incompleto/proporção errada, 3 pasta do dia não e
 ## Como reagir ao resultado
 
 - **STATUS OK:** informe em uma linha e liste as 4 candidatas de capinha (16x09 limpas). Siga para a Etapa 4.
-- **INCOMPLETO:** liste exatamente os arquivos com problema. **Não siga para a Etapa 4** com esses arquivos. Não renomeie nem apague nada do usuário. Sugira pedir ao Codex para regerar apenas os arquivos listados com a proporção correta.
-  - Atenção: já ocorreu de o Codex salvar imagem quadrada com nome `16x09` (e vice-versa). Trocar nomes automaticamente é arriscado, pois pode misturar com/sem texto; confirme visualmente com o usuário antes de qualquer renomeação.
+- **INCOMPLETO:** liste exatamente os arquivos com problema (nome e proporção atual) e **pare**: não siga para a Etapa 4.
+  - **Inconsistência de nome x proporção (ex.: imagem quadrada com nome `16x09` e vice-versa):** avise o usuário e peça para corrigir os nomes conforme o formato (`16x09` = 16:9, `1x1` = 1:1, `-com-texto` = com o texto sobreposto). O usuário **não gera novas imagens** nesse caso. **Premissa fixa (definida pelo usuário em 2026-11-20, vale para toda geração): a correção de nomes faz parte da verificação, mas NUNCA é feita sem autorização.** Procedimento:
+    1. Abra cada imagem dos capítulos afetados (todas as 4 do capítulo) e identifique a proporção real (dimensões) **e** a presença de texto sobreposto (o script não detecta texto; a troca costuma ser um ciclo de 3 arquivos, não um par).
+    2. Monte a **tabela de renomeação proposta** (nome atual → nome correto, com proporção e texto observados) e **pergunte ao usuário se pode corrigir automaticamente**. **Pare e aguarde a autorização explícita** nesta geração; autorização de dias anteriores não vale.
+    3. Só após o "sim": renomeie via nomes temporários (`tmp_`), sem apagar nem sobrescrever nada, e rode a conferência de novo.
+    4. Se as dimensões mostrarem que **não existe** imagem na proporção necessária (ex.: capítulo com as 4 em 16:9), renomear não resolve: informe e peça regeneração no Codex.
+  - Se faltar arquivo ou for outro problema, sugira ao Codex regerar apenas os faltantes.
 - **Pasta não encontrada (código 3):** as imagens ainda não foram geradas; lembre o usuário do passo 1.
 
 ## Regras que valem para as imagens (conferir ao olhar uma imagem, se o usuário pedir revisão)
 
 - Cada capítulo tem uma cena coesa e única, coerente com o tópico.
-- Proibido representar o rosto de Jesus ou a figura física de Deus.
+- Proibido representar o rosto de Jesus Cristo ou a figura física de Deus. **Rosto de anjo pode aparecer** (esclarecido pelo usuário em 2026-11-20); não sinalize anjos como violação.
 - Versões com texto: texto integral do tópico; versões limpas: sem nenhum texto.
 
 ## Passo seguinte

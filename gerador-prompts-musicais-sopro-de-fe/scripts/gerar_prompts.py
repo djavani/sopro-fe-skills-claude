@@ -19,7 +19,7 @@ STYLE = (
     "powerful snare, bright cymbal crashes, grand piano chords, warm cello lines, ambient synth pads, "
     "male and female duet, alternating lead vocals, powerful emotional vocal delivery, soft backing choir, "
     "uplifting prayerful atmosphere, dynamic instrumental build, powerful final section, "
-    "full band worship anthem, high fidelity modern studio production."
+    "full band worship anthem, high fidelity modern studio production, total song length under 4 minutes, compact arrangement, short outro."
 )
 
 TAG_INTRO = ("[Intro: 8s Modern Christian Pop-Rock, Energetic Acoustic Guitar Strumming, Electric Guitar Power Chords "
@@ -35,8 +35,8 @@ TAG_INTERLUDE = ("[Interlude: Melodic Electric Guitar Solo with Delay, Grand Pia
                  "Powerful Pop-Rock Drums and Warm Cello Lines]")
 TAG_FINAL = ("[Final Section: Male & Female Duet - Powerful Emotional Pop-Rock Worship, Full Band Arrangement, "
              "Soft Backing Choir]")
-TAG_ENDING = ("[Ending: Powerful Electric Guitar Sustained Chords, Emotional Grand Piano, Warm Cello Lines, "
-              "Full Band Gradual Fade Out with Cymbal Resonance]")
+TAG_ENDING = ("[Ending: Short Instrumental Outro, max 20s, Expressive Electric Guitar Solo with Emotional Grand Piano "
+              "and Warm Cello Lines, Full Band Quick Fade Out with Cymbal Resonance, End Song by 20 seconds]")
 
 # fim de frase: . ? ! (opcionalmente fechando aspas) seguido de espaco e inicio de nova frase
 FIM_FRASE = re.compile(r"(?<=[.?!])\s+|(?<=[.?!][”\"])\s+")
