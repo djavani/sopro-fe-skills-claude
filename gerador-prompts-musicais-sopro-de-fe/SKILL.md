@@ -10,12 +10,12 @@ Saída: **Style Prompt** + **Lyrics Prompt**.
 
 ## Regra de ouro
 
-A música é um devocional cantado: **a letra é 100% o texto da Saída B**. Nunca criar rimas, refrão, repetições, resumos, cortes, trocas de palavra ou pontuação. Só se acrescentam as tags entre colchetes e os rótulos `Male Vocal` / `Female Vocal` do Bridge.
+A música é um devocional cantado: **a letra é 100% o texto da Saída B**. Nunca criar rimas, refrão, repetições, resumos, cortes, trocas de palavra ou pontuação. Só se acrescentam as tags entre colchetes.
 
 ## Premissas de duração (fixas)
 
-- A música deve ter **no máximo 4 minutos, se possível** (o Style Prompt pede "under 4 minutes, compact arrangement").
-- O **encerramento** (`[Ending]`) é um outro instrumental **curtíssimo, de no máximo 20 segundos**, com breve resolução final, **sem solo longo nem repetição instrumental** depois do último refrão; a música termina de forma natural e decisiva. Não acrescentar nada depois dele. (Estilo atualizado em 2026-11-24: "Modern Christian Devotional Pop-Rock Worship".)
+- A música deve ter **no máximo 4 minutos, se possível** (o Style Prompt pede "concise song structure").
+- O **encerramento** (`[Short Outro]`) é um outro instrumental curto, **de no máximo 20 segundos**, com fade out limpo e `[End]`. Não acrescentar nada depois dele. (Estilo atualizado em 2026-11-24: balada pop suave, 82 BPM.)
 - Se a plataforma gerar acima disso, avise o usuário para regenerar ou cortar o final.
 
 ## Como executar
@@ -28,25 +28,25 @@ python -I "<pasta-da-skill>/scripts/gerar_prompts.py" "<arquivo-saida-b.txt>"
 
 O script imprime `===STYLE===` e `===LYRICS===`, e **confere que as palavras da letra são idênticas às da Saída B** (se divergir, sai com erro 2: não entregue nada e avise o usuário).
 
-## Estrutura fixa da letra
+## Estrutura fixa da letra (atualizada em 2026-11-24)
 
-| Seção | Voz | Conteúdo |
-|---|---|---|
-| `[Intro]` | instrumental | sem letra |
-| `[Verse 1]` | masculina | tópico 1 inteiro |
-| `[Verse 2]` | feminina | tópico 2 inteiro |
-| `[Bridge]` | masculina alternando com feminina | tópico 3 dividido ao meio por frases: 1ª metade em `Male Vocal`, 2ª em `Female Vocal` (número ímpar de frases: a masculina fica com a extra) |
-| `[Interlude]` | instrumental | sem letra (solo de guitarra) |
-| `[Final Section]` | dueto | tópico 4 inteiro |
-| `[Ending]` | instrumental | sem letra, outro curtíssimo de no máx. 20s, resolução breve, sem solo longo |
+| Seção | Conteúdo |
+|---|---|
+| `[Short Intro: Soft Piano and Acoustic Guitar - 10s]` | instrumental |
+| `[Verse 1]` | tópico 1 inteiro |
+| `[Verse 2]` | tópico 2 inteiro |
+| `[Short Bridge: <instrumento(s)> - 10s]` | instrumental de 10s; **o instrumento varia a cada execução** (sorteio no script: piano, violão, violoncelo, flauta, violino, harpa, guitarra limpa ou combinações). Não é regra ser sempre piano solo |
+| `[Verse 3]` | tópico 3 inteiro |
+| `[Verse 4]` | tópico 4 inteiro |
+| `[Short Outro: Brief Instrumental Fade Out - max 20s] [End]` | instrumental |
 
-As tags (descrições instrumentais) e o Style Prompt estão fixos dentro do script, copiados do modelo que o usuário usa hoje. Para mudar o estilo, edite as constantes no topo de `gerar_prompts.py`.
+Sem rótulos de voz masculina/feminina. O Style Prompt e as tags estão fixos nas constantes no topo de `gerar_prompts.py` (inclusive a lista `BRIDGES` da ponte). Para mudar o estilo, edite essas constantes.
 
 ## Formato da entrega
 
 - Mostre **dois blocos de código separados**, rotulados "Style Prompt" e "Lyrics Prompt", para copiar e colar direto na plataforma.
 - Sem comentários dentro dos blocos. Fora deles, no máximo uma linha dizendo que a conferência da letra passou.
-- O Style Prompt tem cerca de 775 caracteres (cabe no limite de 1000 do Suno).
+- O Style Prompt tem cerca de 300 caracteres (cabe no limite do Suno).
 
 ## Passo seguinte
 

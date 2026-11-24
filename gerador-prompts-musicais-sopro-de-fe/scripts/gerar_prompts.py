@@ -9,36 +9,34 @@ Saida:  ===STYLE===  e  ===LYRICS===
 A letra e 100% o texto da Saida B: nada e adicionado, repetido, cortado ou reescrito.
 O script confere isso no final (codigo de saida 2 se alguma palavra divergir).
 """
+import random
 import re
 import sys
 
 STYLE = (
-    "Modern Christian Devotional Pop-Rock Worship, contemporary gospel pop, 80 BPM, "
-    "energetic acoustic guitars, electric guitar riffs and power chords, subtle delay, expressive guitar solo, "
-    "driving bass, punchy live pop drums, powerful snare and bright cymbals, grand piano, warm cello, "
-    "ambient synth pads, male and female duet with alternating emotional lead vocals, soft backing choir, "
-    "uplifting prayerful and reverent atmosphere, dynamic instrumental build, "
-    "powerful worship chorus and final section, full band arrangement, high-fidelity modern studio production, "
-    "compact arrangement, under 4 minutes. Very short instrumental outro, maximum 20 seconds, brief final resolution, "
-    "no extended solo or instrumental repetition after the final chorus, finish naturally and decisively."
+    "soft pop ballad, smooth acoustic guitar fingerpicking, gentle upright piano chords, "
+    "warm ambient synth pads, emotional soft vocal, mid-tempo 82 BPM, minimal instrumental interludes, "
+    "short bridge, brief 15-20s instrumental outro, clean fade out, concise song structure, high fidelity mix"
 )
 
-TAG_INTRO = ("[Intro: 8s Modern Christian Pop-Rock, Energetic Acoustic Guitar Strumming, Electric Guitar Power Chords "
-             "with Subtle Delay, Melodic Electric Guitar Riffs, Driving Electric Bass, Punchy Live Pop-Rock Drums, "
-             "Bright Cymbal Hits, Ambient Synth Pads, Grand Piano Accents - Strong Rhythmic Build, Fast Vocal Entry]")
-TAG_V1 = ("[Verse 1: Male Vocal - Warm Modern Pop-Rock, Rhythmic Acoustic Guitar, Clean Electric Guitar, "
-          "Deep Electric Bass, Steady Live Drums]")
-TAG_V2 = ("[Verse 2: Female Vocal - Soft and Clear, Clean Electric Guitar Arpeggios, Acoustic Guitar, "
-          "Warm Piano, Light Pop-Rock Drums]")
-TAG_BRIDGE = ("[Bridge: Male Vocal alternating with Female Vocal - Deep Intonation, Emotional Electric Guitar Build, "
-              "Powerful Bass, Progressive Live Drums, Rising Cymbals]")
-TAG_INTERLUDE = ("[Interlude: Melodic Electric Guitar Solo with Delay, Grand Piano, Electric Bass, "
-                 "Powerful Pop-Rock Drums and Warm Cello Lines]")
-TAG_FINAL = ("[Final Section: Male & Female Duet - Powerful Emotional Pop-Rock Worship, Full Band Arrangement, "
-             "Soft Backing Choir]")
-TAG_ENDING = ("[Ending: Very Short Instrumental Outro, max 20s, Brief Final Resolution with Grand Piano and Warm Cello, "
-              "No Extended Solo, No Instrumental Repetition, Full Band Decisive Final Chord with Cymbal Resonance, "
-              "End Song by 20 seconds]")
+TAG_INTRO = "[Short Intro: Soft Piano and Acoustic Guitar - 10s]"
+TAG_ENDING = "[Short Outro: Brief Instrumental Fade Out - max 20s] [End]"
+
+# A ponte instrumental (10s) varia a cada execucao: solos de varios instrumentos ou combinacoes.
+BRIDGES = [
+    "Minimal Piano Solo",
+    "Soft Acoustic Guitar Solo",
+    "Warm Cello Solo",
+    "Gentle Flute Solo",
+    "Delicate Violin Solo",
+    "Soft Harp Arpeggios",
+    "Clean Electric Guitar Solo with Subtle Delay",
+    "Warm Cello and Acoustic Guitar Duet",
+    "Piano and Violin Duet",
+    "Flute and Harp with Soft Synth Pads",
+    "Acoustic Guitar, Piano and Warm Cello Trio",
+    "Soft Strings and Piano Ensemble",
+]
 
 # fim de frase: . ? ! (opcionalmente fechando aspas) seguido de espaco e inicio de nova frase
 FIM_FRASE = re.compile(r"(?<=[.?!])\s+|(?<=[.?!][”\"])\s+")
@@ -49,18 +47,14 @@ def frases(texto):
 
 
 def montar(topicos):
-    f3 = frases(topicos[2])
-    if len(f3) < 2:
-        raise ValueError("Topico 3 tem menos de 2 frases; nao da para dividir o Bridge.")
-    meio = (len(f3) + 1) // 2          # impar: a voz masculina fica com a frase extra
-    t3_m, t3_f = " ".join(f3[:meio]), " ".join(f3[meio:])
+    bridge = f"[Short Bridge: {random.choice(BRIDGES)} - 10s]"
     blocos = [
         TAG_INTRO,
-        f"{TAG_V1}\n{topicos[0]}",
-        f"{TAG_V2}\n{topicos[1]}",
-        f"{TAG_BRIDGE}\n\nMale Vocal\n\n{t3_m}\n\nFemale Vocal\n\n{t3_f}",
-        TAG_INTERLUDE,
-        f"{TAG_FINAL}\n{topicos[3]}",
+        f"[Verse 1]\n{topicos[0]}",
+        f"[Verse 2]\n{topicos[1]}",
+        bridge,
+        f"[Verse 3]\n{topicos[2]}",
+        f"[Verse 4]\n{topicos[3]}",
         TAG_ENDING,
     ]
     return "\n\n".join(blocos)
@@ -71,9 +65,8 @@ def palavras(t):
 
 
 def conferir(topicos, letra):
-    """A letra, sem tags e sem os rotulos Male/Female Vocal, deve ter exatamente as palavras da Saida B."""
+    """A letra, sem tags entre colchetes, deve ter exatamente as palavras da Saida B."""
     sem_tags = re.sub(r"\[[^\]]*\]", " ", letra)
-    sem_tags = re.sub(r"(?m)^(Male|Female) Vocal$", " ", sem_tags)
     return palavras(sem_tags) == palavras(" ".join(topicos))
 
 
