@@ -15,7 +15,7 @@ A música é um devocional cantado: **a letra é 100% o texto da Saída B**. Nun
 ## Premissas de duração (fixas)
 
 - A música deve ter **no máximo 4 minutos, se possível** (o Style Prompt pede "under 4 minutes, compact arrangement").
-- O **encerramento** (`[Ending]`) é instrumental ou solo de **no máximo 20 segundos**, com fade out rápido. Não acrescentar nada depois dele.
+- O **encerramento** (`[Ending]`) é um outro instrumental **curtíssimo, de no máximo 20 segundos**, com breve resolução final, **sem solo longo nem repetição instrumental** depois do último refrão; a música termina de forma natural e decisiva. Não acrescentar nada depois dele. (Estilo atualizado em 2026-11-24: "Modern Christian Devotional Pop-Rock Worship".)
 - Se a plataforma gerar acima disso, avise o usuário para regenerar ou cortar o final.
 
 ## Como executar
@@ -38,7 +38,7 @@ O script imprime `===STYLE===` e `===LYRICS===`, e **confere que as palavras da 
 | `[Bridge]` | masculina alternando com feminina | tópico 3 dividido ao meio por frases: 1ª metade em `Male Vocal`, 2ª em `Female Vocal` (número ímpar de frases: a masculina fica com a extra) |
 | `[Interlude]` | instrumental | sem letra (solo de guitarra) |
 | `[Final Section]` | dueto | tópico 4 inteiro |
-| `[Ending]` | instrumental | sem letra, solo/outro de no máx. 20s, fade out rápido |
+| `[Ending]` | instrumental | sem letra, outro curtíssimo de no máx. 20s, resolução breve, sem solo longo |
 
 As tags (descrições instrumentais) e o Style Prompt estão fixos dentro do script, copiados do modelo que o usuário usa hoje. Para mudar o estilo, edite as constantes no topo de `gerar_prompts.py`.
 
@@ -46,7 +46,7 @@ As tags (descrições instrumentais) e o Style Prompt estão fixos dentro do scr
 
 - Mostre **dois blocos de código separados**, rotulados "Style Prompt" e "Lyrics Prompt", para copiar e colar direto na plataforma.
 - Sem comentários dentro dos blocos. Fora deles, no máximo uma linha dizendo que a conferência da letra passou.
-- O Style Prompt tem cerca de 740 caracteres (cabe no limite de 1000 do Suno).
+- O Style Prompt tem cerca de 775 caracteres (cabe no limite de 1000 do Suno).
 
 ## Passo seguinte
 

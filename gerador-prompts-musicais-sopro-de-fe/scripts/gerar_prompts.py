@@ -13,13 +13,14 @@ import re
 import sys
 
 STYLE = (
-    "Modern Christian Pop-Rock Worship, contemporary gospel pop-rock, 80 BPM, 78-82 BPM, "
-    "energetic acoustic guitar strumming, electric guitar power chords, melodic electric guitar riffs, "
-    "subtle guitar delay, expressive electric guitar solo, driving electric bass, punchy live pop-rock drums, "
-    "powerful snare, bright cymbal crashes, grand piano chords, warm cello lines, ambient synth pads, "
-    "male and female duet, alternating lead vocals, powerful emotional vocal delivery, soft backing choir, "
-    "uplifting prayerful atmosphere, dynamic instrumental build, powerful final section, "
-    "full band worship anthem, high fidelity modern studio production, total song length under 4 minutes, compact arrangement, short outro."
+    "Modern Christian Devotional Pop-Rock Worship, contemporary gospel pop, 80 BPM, "
+    "energetic acoustic guitars, electric guitar riffs and power chords, subtle delay, expressive guitar solo, "
+    "driving bass, punchy live pop drums, powerful snare and bright cymbals, grand piano, warm cello, "
+    "ambient synth pads, male and female duet with alternating emotional lead vocals, soft backing choir, "
+    "uplifting prayerful and reverent atmosphere, dynamic instrumental build, "
+    "powerful worship chorus and final section, full band arrangement, high-fidelity modern studio production, "
+    "compact arrangement, under 4 minutes. Very short instrumental outro, maximum 20 seconds, brief final resolution, "
+    "no extended solo or instrumental repetition after the final chorus, finish naturally and decisively."
 )
 
 TAG_INTRO = ("[Intro: 8s Modern Christian Pop-Rock, Energetic Acoustic Guitar Strumming, Electric Guitar Power Chords "
@@ -35,8 +36,9 @@ TAG_INTERLUDE = ("[Interlude: Melodic Electric Guitar Solo with Delay, Grand Pia
                  "Powerful Pop-Rock Drums and Warm Cello Lines]")
 TAG_FINAL = ("[Final Section: Male & Female Duet - Powerful Emotional Pop-Rock Worship, Full Band Arrangement, "
              "Soft Backing Choir]")
-TAG_ENDING = ("[Ending: Short Instrumental Outro, max 20s, Expressive Electric Guitar Solo with Emotional Grand Piano "
-              "and Warm Cello Lines, Full Band Quick Fade Out with Cymbal Resonance, End Song by 20 seconds]")
+TAG_ENDING = ("[Ending: Very Short Instrumental Outro, max 20s, Brief Final Resolution with Grand Piano and Warm Cello, "
+              "No Extended Solo, No Instrumental Repetition, Full Band Decisive Final Chord with Cymbal Resonance, "
+              "End Song by 20 seconds]")
 
 # fim de frase: . ? ! (opcionalmente fechando aspas) seguido de espaco e inicio de nova frase
 FIM_FRASE = re.compile(r"(?<=[.?!])\s+|(?<=[.?!][”\"])\s+")
